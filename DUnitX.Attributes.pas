@@ -269,11 +269,11 @@ type
   TestCaseAttribute = class(CustomTestCaseAttribute)
   protected
     FCaseInfo : TestCaseInfo;
-    function GetCaseInfo : TestCaseInfo; Override;
-    function GetName: String;
+    function GetCaseInfo : TestCaseInfo; override;
+    function GetName: string;
     function GetValues: TValueArray;
   public
-    constructor Create(const ACaseName : string; const AValues : string;const ASeparator : string = ',');overload;
+    constructor Create(const ACaseName : string; const AValues : string; const ASeparator : string = ',');overload;
     property Name : String read GetName;
     property Values : TValueArray read GetValues;
   end;
@@ -285,6 +285,7 @@ type
   /// </summary>
   TestCaseProviderAttribute = Class(TCustomAttribute)
   protected
+<<<<<<< HEAD
      fname : string;
      fclass : TTestDataProviderClass;
   Public
@@ -293,6 +294,16 @@ type
      Property ProviderName : string read fname;
      Property ProviderClass: TTestDataProviderClass read fclass;
   End;
+=======
+     FName : string;
+     FClass : TTestDataProviderClass;
+  public
+     constructor Create(const providerName : string);overload;
+     constructor Create(const AClass : TTestDataProviderClass);overload;
+     property ProviderName : string read Fname;
+     property ProviderClass: TTestDataProviderClass read FClass;
+  end;
+>>>>>>> upstream/master
 
 implementation
 
@@ -421,6 +432,7 @@ end;
 
 { TestCaseProviderAttribute }
 
+<<<<<<< HEAD
 constructor TestCaseProviderAttribute.Create(const ProviderName: string);
 begin
   fname := ProviderName;
@@ -433,6 +445,19 @@ constructor TestCaseProviderAttribute.Create(
 begin
   fname := '';
   fclass := AClass;
+=======
+constructor TestCaseProviderAttribute.Create(const providerName : string);
+begin
+  FName := ProviderName;
+  FClass := NIL;
+end;
+
+
+constructor TestCaseProviderAttribute.Create(const AClass: TTestDataProviderClass);
+begin
+  FName := '';
+  FClass := AClass;
+>>>>>>> upstream/master
 end;
 
 end.

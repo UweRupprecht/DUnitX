@@ -278,7 +278,11 @@ var
   iProvider: ITestDataProvider;
   count,x     : integer;
   Params      : TValueArray;
+<<<<<<< HEAD
   CaseName    : string;
+=======
+  caseName    : string;
+>>>>>>> upstream/master
 
 
   category        : string;
@@ -449,6 +453,7 @@ begin
           //Add the Providertests first
           for tstProviderAttrib in tstProviderAttribs do
           begin
+<<<<<<< HEAD
             if (tstProviderAttrib.ProviderClass <> NIL) then
                 iProvider := TestDataProviderManager.GetProvider(tstProviderAttrib.ProviderClass)
             else
@@ -469,6 +474,28 @@ begin
             end;
           end;
           // Add individual test cases first
+=======
+            if (tstProviderAttrib.ProviderClass <> nil) then
+                iProvider := TestDataProviderManager.GetProvider(tstProviderAttrib.ProviderClass)
+            else
+               iProvider := TestDataProviderManager.GetProvider(tstProviderAttrib.ProviderName);
+            if (iProvider <> nil) then
+            begin
+              count := iProvider.GetCaseCount(method.name);
+              caseName := iProvider.GetCaseName(method.name);
+              for x := 0 to count -1 do
+              begin
+                params := iProvider.GetCaseParams(method.name,x);
+                for i := 1 to repeatCount do
+                begin
+                  currentFixture.AddTestCase(method.Name, FormatCaseName(caseName,x), FormatTestName(method.Name, x, repeatCount), category, method, testEnabled, params);
+                end;
+              end;
+              iProvider := nil;
+            end;
+          end;
+          // Add individual test cases
+>>>>>>> upstream/master
           for testCaseAttrib in testCases do
           begin
             for i := 1 to repeatCount do
